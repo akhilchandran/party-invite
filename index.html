@@ -408,7 +408,7 @@ body{
   }
 
   function openCard(){
-    ClearTimeout(autoOpenTimer);
+    clearTimeout(autoOpenTimer);
     if(animating||card.classList.contains('open'))return;
     animating=true;
     clearTimeout(animTimer);
