@@ -325,7 +325,20 @@ body{
   var animating=false;
   var animTimer=null;
 
+  var autoOpenTimer = null;
+
+  function scheduleAutoOpen() {
+    clearTimeout(autoOpenTimer);
+    if (card.classList.contains('used') || card.classList.contains('open')) return;
+    autoOpenTimer = setTimeout(function () {
+      if (!card.classList.contains('used') && !card.classList.contains('open')) {
+        openCard();
+      }
+    }, 4000);
+  }
+
   window.addEventListener('load',function(){
+    scheduleAutoOpen();
     ['background.jpg','cover.jpg','invitation.png'].forEach(function(src){
       var img=new Image();
       img.src=src;
@@ -395,6 +408,7 @@ body{
   }
 
   function openCard(){
+    ClearTimeout(autoOpenTimer);
     if(animating||card.classList.contains('open'))return;
     animating=true;
     clearTimeout(animTimer);
